@@ -1,7 +1,12 @@
 <template>
-  <div class=""></div>
+  <div class="login">
+    <h1>login</h1>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login {
+}
+</style>
