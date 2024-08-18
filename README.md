@@ -14,3 +14,6 @@
 # css配置 样式的重置
 
 npm install normalize.css
+reset.css
+
+## 路由安装
