@@ -1,12 +1,14 @@
 <template>
-  <div class="login">
-    <h1>login</h1>
+  <div class="main">
+    <h1>hje;;p</h1>
+    <h1>l222 {{ counterStore.count }}</h1>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCounterStore } from '@/store/counter'
 
-<style lang="scss" scoped>
-.login {
-}
-</style>
+const counterStore = useCounterStore()
+</script>
+
+<style lang="scss" scoped></style>

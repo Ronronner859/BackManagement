@@ -17,3 +17,12 @@ npm install normalize.css
 reset.css
 
 ## 路由安装
+
+主页
+404
+重定向
+
+## 状态管理安装
+
+vuex
+pinia
