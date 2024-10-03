@@ -19,6 +19,7 @@ class HYRequest {
 
   // request实例 => axios的实例
   constructor(config: HYRequestConfig) {
+    // 创建axios实例 config是axios的配置项
     this.instance = axios.create(config)
 
     // 每个instance实例都添加拦截器

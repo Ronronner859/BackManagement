@@ -13,6 +13,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/axios": "^0.9.36",
+    "axios": "^1.7.7",
+    "element-plus": "^2.8.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.2.2",
     "vue": "^3.4.29",
@@ -33,6 +36,8 @@
     "prettier": "^3.2.5",
     "sass-embedded": "^1.77.8",
     "typescript": "~5.4.0",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-vue-components": "^0.27.4",
     "vite": "^5.3.1",
     "vue-tsc": "^2.0.21"
   }

@@ -26,3 +26,15 @@ reset.css
 
 vuex
 pinia
+
+## 组件库安装
+
+element-plus
+自动导入
+
+## 请求库安装
+
+axios
+
+npm install axios
+npm install @types/axios -D
