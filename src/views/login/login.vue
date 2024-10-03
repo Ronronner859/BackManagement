@@ -1,16 +1,25 @@
 <template>
   <div class="login">
-    <div class="mb-4">
-      <el-button type="default">Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success">Success</el-button>
-      <el-button type="info">Info</el-button>
-      <el-button type="warning">Warning</el-button>
-      <el-button type="danger">Danger</el-button>
+    <div class="login-box">
+      <LoginPanel />
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import LoginPanel from './child-cpns/login-panel.vue'
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  background-image: url('@/assets/img/beak-bg.png');
+  background-size: cover;
+  background-position: center;
+}
+</style>

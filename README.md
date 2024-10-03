@@ -38,3 +38,17 @@ axios
 
 npm install axios
 npm install @types/axios -D
+
+## vh vw 格式化全局样式
+
+## tailwindcss安装
+
+npm install tailwindcss
+npm install -D tailwindcss-animate
+
+全局样式文件输出
+npx tailwindcss -i ./src/assets/tailwind/index.css -o ./src/assets/tailwind/output.css --watch
+
+# 国际化
+
+npm install vue-i18n
