@@ -24,7 +24,8 @@
     // 相关baseUrl，paths说明请查看官方文档
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "types": ["element-plus/global"]
+    "types": ["element-plus/global"],
+    "module": "ESNext"
   },
   // include也需要配置以下：
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

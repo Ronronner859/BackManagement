@@ -4,10 +4,12 @@ import './assets/css/reset.css'
 import App from './App.vue'
 import router from './router'
 import pinia from './store'
-import './service/modules/home'
 import './assets/tailwind/output.css' // 引入tailwindcss
 import { createI18n } from 'vue-i18n'
 import registerIcons from './global/register-icons'
+// 针对ElMessage的样式
+// import 'element-plus/theme-chalk/el-message.css'
+console.log(import.meta.env)
 const app = createApp(App)
 // 1、创建中文语言包对象
 const zh = {

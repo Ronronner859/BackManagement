@@ -52,3 +52,29 @@ npx tailwindcss -i ./src/assets/tailwind/index.css -o ./src/assets/tailwind/outp
 # 国际化
 
 npm install vue-i18n
+
+# 登录模块
+
+1. 登录方式 账号 手机 扫码
+2. 登录校验 账号 手机 扫码
+3. 登录接口 账号 手机 扫码
+
+# 提示样式引入
+
+插件引入
+npm i vite-plugin-style-import -D
+
+# 后台搭建
+
+node + express + mysql + jwt
+
+1. 安装express
+2. 安装mysql2
+3. 安装bcryptjs
+4. 安装jsonwebtoken
+5. 安装cors
+6. 安装dotenv
+7. 安装axios
+8. 安装nodemon
+
+# 类型文件
