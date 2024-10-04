@@ -11,14 +11,24 @@
       <el-form-item prop="phone" :label="$t('phone')">
         <el-input v-model="form.phone" :placeholder="$t('phone')" clearable />
       </el-form-item>
-      <el-form-item prop="password" :label="$t('password')">
-        <el-input
-          v-model="form.password"
-          :placeholder="$t('password')"
-          clearable
-          show-password
-          type="password"
-        />
+      <el-form-item prop="password" :label="$t('code')">
+        <div class="code-container">
+          <el-input
+            v-model="form.password"
+            clearable
+            :placeholder="$t('code')"
+            show-password
+            type="password"
+          />
+          <el-button
+            type="primary"
+            size="small"
+            :disabled="isDisabled"
+            @click="handleSendCode"
+          >
+            {{ $t('sendCode') }}
+          </el-button>
+        </div>
       </el-form-item>
     </el-form>
   </div>
@@ -60,8 +70,27 @@ const handlePhoneLogin = () => {
     }
   })
 }
+
+const isDisabled = ref<boolean>(false)
+const handleSendCode = () => {
+  isDisabled.value = true
+  setTimeout(() => {
+    isDisabled.value = false
+  }, 1000)
+}
 defineExpose({
   handlePhoneLogin
 })
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="scss">
+.code-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .el-button {
+    width: 100px;
+    height: 40px;
+    margin-left: 5px;
+  }
+}
+</style>

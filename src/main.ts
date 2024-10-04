@@ -7,9 +7,11 @@ import pinia from './store'
 import './assets/tailwind/output.css' // 引入tailwindcss
 import { createI18n } from 'vue-i18n'
 import registerIcons from './global/register-icons'
+
 // 针对ElMessage的样式
 // import 'element-plus/theme-chalk/el-message.css'
 console.log(import.meta.env)
+
 const app = createApp(App)
 // 1、创建中文语言包对象
 const zh = {
@@ -21,6 +23,7 @@ const zh = {
   remember: '记住我',
   forget: '忘记密码',
   login: '登录',
+  code: '验证码',
   BackendManagementSystem: '后台管理系统'
 }
 // 2、创建英文语言包对象
@@ -33,7 +36,8 @@ const en = {
   remember: 'Remember me',
   forget: 'Forget password',
   login: 'Login',
-  BackendManagementSystem: 'Backend Management System'
+  BackendManagementSystem: 'Backend Management System',
+  code: 'Code'
 }
 // 3、组合语言包对象
 const messages = {

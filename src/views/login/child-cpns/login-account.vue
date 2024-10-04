@@ -37,6 +37,7 @@ import { useLoginStore } from '@/store/login/login'
 import type { IForm } from '@/types'
 import { localCache } from '@/utils/cache'
 import { ACCOUNT_INFO } from '@/global/constants'
+import { useUsersStore } from '@/store/users/users'
 const form = ref<IForm>({
   username: localCache.getCache(ACCOUNT_INFO)?.username ?? '',
   password: localCache.getCache(ACCOUNT_INFO)?.password ?? ''
@@ -55,7 +56,8 @@ const resetForm = () => {
   accountFormRef.value.resetFields()
 }
 const loginStore = useLoginStore()
-
+const usersStore = useUsersStore()
+usersStore.getUsers()
 //账号登录
 const handleLogin = (rememberMe: boolean) => {
   accountFormRef.value.validate((valid: boolean) => {
