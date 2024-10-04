@@ -51,7 +51,9 @@
       </el-tabs>
     </div>
     <div class="login-remember">
-      <el-checkbox v-model="rememberMe">{{ $t('remember') }}</el-checkbox>
+      <el-checkbox v-model="rememberMe" @change="handleRememberMe">{{
+        $t('remember')
+      }}</el-checkbox>
       <div class="flex items-center gap-5">
         <el-link type="primary">{{ $t('forget') }}</el-link>
         <el-link type="primary" @click="handleRegisterLink()">注册</el-link>
@@ -80,7 +82,7 @@ import loginAccount from './login-account.vue'
 import loginPhone from './login-phone.vue'
 import loginScan from './login-scan.vue'
 import { useRouter } from 'vue-router'
-
+import { localCache } from '@/utils/cache'
 const router = useRouter()
 
 const activeName = ref<'account' | 'phone'>('account')
@@ -115,6 +117,12 @@ const handleLogin = (value: 'account' | 'phone' | 'scan') => {
 
 const handleRegisterLink = () => {
   router.push('/register')
+}
+
+const handleRememberMe = (value: boolean) => {
+  if (value) {
+  } else {
+  }
 }
 </script>
 

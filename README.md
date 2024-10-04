@@ -78,3 +78,12 @@ node + express + mysql + jwt
 8. 安装nodemon
 
 # 类型文件
+
+# 缓存
+
+localStorage
+sessionStorage
+
+## 缓存工具类
+
+# 抽取常量
