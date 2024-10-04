@@ -35,9 +35,11 @@ import type { FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { useLoginStore } from '@/store/login/login'
 import type { IForm } from '@/types'
+import { localCache } from '@/utils/cache'
+import { ACCOUNT_INFO } from '@/global/constants'
 const form = ref<IForm>({
-  username: '',
-  password: ''
+  username: localCache.getCache(ACCOUNT_INFO)?.username ?? '',
+  password: localCache.getCache(ACCOUNT_INFO)?.password ?? ''
 })
 
 const accountFormRef = ref<any>()
@@ -55,13 +57,16 @@ const resetForm = () => {
 const loginStore = useLoginStore()
 
 //账号登录
-const handleLogin = () => {
+const handleLogin = (rememberMe: boolean) => {
   accountFormRef.value.validate((valid: boolean) => {
     if (valid) {
-      console.log('submit!')
-      loginStore.accountLogin(form.value)
-      ElMessage.success('登录成功')
-      resetForm()
+      loginStore.accountLogin(form.value).then(() => {
+        if (rememberMe) {
+          localCache.setCache(ACCOUNT_INFO, form.value)
+        } else {
+          localCache.removeCache(ACCOUNT_INFO)
+        }
+      })
     } else {
       console.log('error submit!')
       ElMessage.error('请输入正确的用户名和密码')

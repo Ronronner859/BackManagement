@@ -51,9 +51,7 @@
       </el-tabs>
     </div>
     <div class="login-remember">
-      <el-checkbox v-model="rememberMe" @change="handleRememberMe">{{
-        $t('remember')
-      }}</el-checkbox>
+      <el-checkbox v-model="rememberMe">{{ $t('remember') }}</el-checkbox>
       <div class="flex items-center gap-5">
         <el-link type="primary">{{ $t('forget') }}</el-link>
         <el-link type="primary" @click="handleRegisterLink()">注册</el-link>
@@ -77,17 +75,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import loginAccount from './login-account.vue'
 import loginPhone from './login-phone.vue'
 import loginScan from './login-scan.vue'
 import { useRouter } from 'vue-router'
 import { localCache } from '@/utils/cache'
+import { REMEMBER_ME } from '@/global/constants'
 const router = useRouter()
 
 const activeName = ref<'account' | 'phone'>('account')
-const rememberMe = ref<boolean>(false)
-
+const rememberMe = ref<boolean>(localCache.getCache(REMEMBER_ME) ?? false)
+watch(rememberMe, (newValue) => {
+  if (newValue) {
+    localCache.setCache(REMEMBER_ME, true)
+  } else {
+    localCache.removeCache(REMEMBER_ME)
+  }
+})
 const accountFormRef = ref<InstanceType<typeof loginAccount>>()
 const phoneFormRef = ref<InstanceType<typeof loginPhone>>()
 
@@ -107,7 +112,7 @@ const handleClick = (tab: 'account' | 'phone') => {
 const handleLogin = (value: 'account' | 'phone' | 'scan') => {
   if (value === 'account') {
     // 可选链操作符 如果accountFormRef.value为空，则不执行handleLogin方法
-    accountFormRef.value?.handleLogin()
+    accountFormRef.value?.handleLogin(rememberMe.value)
   } else if (value === 'phone') {
     phoneFormRef.value?.handlePhoneLogin()
   } else {
@@ -117,12 +122,6 @@ const handleLogin = (value: 'account' | 'phone' | 'scan') => {
 
 const handleRegisterLink = () => {
   router.push('/register')
-}
-
-const handleRememberMe = (value: boolean) => {
-  if (value) {
-  } else {
-  }
 }
 </script>
 
