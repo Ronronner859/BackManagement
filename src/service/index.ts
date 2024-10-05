@@ -1,9 +1,20 @@
 import { BASE_URL, TIME_OUT } from './config'
 import HYRequest from './request'
-
+import { localCache } from '@/utils/cache'
+import { LOGIN_TOKEN } from '@/global/constants'
 const hyRequest = new HYRequest({
   baseURL: BASE_URL,
-  timeout: TIME_OUT
+  timeout: TIME_OUT,
+  interceptors: {
+    requestSuccessFn: (config) => {
+      config.headers!.Authorization = localCache.getCache(LOGIN_TOKEN)
+      return config
+    },
+    requestFailureFn: (err) => {
+      console.log('爱彼迎的请求失败的拦截')
+      return err
+    }
+  }
 })
 
 export const hyRequest2 = new HYRequest({

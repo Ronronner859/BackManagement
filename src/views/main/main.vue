@@ -17,7 +17,7 @@ const router = useRouter()
 
 const handleLogout = () => {
   // 删除token
-  localCache.removeCache(LOGIN_TOKEN)
+  // localCache.removeCache(LOGIN_TOKEN)
   // 跳转登录页面
   router.push('/login')
 }
