@@ -24,7 +24,7 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="child in item.children" :key="child.id">
-              <el-menu-item :index="child.id">
+              <el-menu-item :index="child.id" @click="handleMenuClick(child)">
                 <el-icon>
                   <component :is="child.icon" />
                 </el-icon>
@@ -41,12 +41,18 @@
 <script setup lang="ts">
 import { useLoginStore } from '@/store/login/login'
 import { ref, defineProps } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const props = defineProps<{
   isShowCollapse: boolean
 }>()
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenu
 console.log(userMenu)
+const handleMenuClick = (child: any) => {
+  const path = child.path
+  router.push(path)
+}
 </script>
 
 <style lang="scss">
