@@ -10,7 +10,7 @@
 .app {
   height: 100vh;
   width: 100vw;
-  background-color: #c4d0d5;
+  // background-color: #c4d0d5;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
 }

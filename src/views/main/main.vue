@@ -1,26 +1,31 @@
 <template>
   <div class="main">
-    <h1>hje;;p</h1>
-    <h1>l222 {{ counterStore.count }}</h1>
-    <el-button @click="handleLogout">退出登录</el-button>
+    <el-container class="main-container">
+      <el-aside width="200px" class="aside">Aside</el-aside>
+      <el-container>
+        <el-header class="header" height="50px">Header</el-header>
+        <el-main class="main">Main</el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script setup lang="ts">
-import { useCounterStore } from '@/store/counter'
-import { LOGIN_TOKEN } from '@/global/constants'
-import { localCache } from '@/utils/cache'
-import { useRouter } from 'vue-router'
+<script setup lang="ts"></script>
 
-const counterStore = useCounterStore()
-const router = useRouter()
-
-const handleLogout = () => {
-  // 删除token
-  // localCache.removeCache(LOGIN_TOKEN)
-  // 跳转登录页面
-  router.push('/login')
+<style lang="scss" scoped>
+.main {
+  height: 100%;
 }
-</script>
-
-<style lang="scss" scoped></style>
+.main-container {
+  height: 100%;
+}
+.aside {
+  background-color: #ddd6d6;
+}
+.header {
+  background-color: #7daeb4;
+}
+.main {
+  background-color: #988888;
+}
+</style>
