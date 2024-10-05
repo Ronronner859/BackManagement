@@ -7,6 +7,7 @@
     <div class="main-menu-menu">
       <el-menu
         default-active="2"
+        :collapse="isShowCollapse"
         active-text-color="#ffd04b"
         background-color="#545c64"
         text-color="#fff"
@@ -15,6 +16,7 @@
           <el-sub-menu :index="item.id">
             <template #title>
               <!-- 字符串 == 转成动态组件 -->
+              <!-- 对服务器复杂数据进行优化  -->
               <!-- :is="item.icon.split('el-icon-')[1]" -->
               <el-icon>
                 <component :is="item.icon" />
@@ -38,6 +40,10 @@
 
 <script setup lang="ts">
 import { useLoginStore } from '@/store/login/login'
+import { ref, defineProps } from 'vue'
+const props = defineProps<{
+  isShowCollapse: boolean
+}>()
 const loginStore = useLoginStore()
 const userMenu = loginStore.userMenu
 console.log(userMenu)

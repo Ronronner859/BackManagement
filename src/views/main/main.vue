@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <el-container class="main-container">
-      <el-aside width="200px" class="aside">
-        <main-menu />
+      <el-aside :width="isShowCollapse ? '60px' : '200px'" class="aside">
+        <main-menu :isShowCollapse="isShowCollapse" />
       </el-aside>
       <el-container>
         <el-header class="header" height="50px">
-          <main-header />
+          <main-header @updateIsCollapse="updateIsCollapse" />
         </el-header>
         <el-main class="main">Main</el-main>
       </el-container>
@@ -16,6 +16,11 @@
 
 <script setup lang="ts">
 import { MainMenu, MainHeader } from '@/components'
+import { ref } from 'vue'
+const isShowCollapse = ref<boolean>(false)
+const updateIsCollapse = (isCollapse: boolean) => {
+  isShowCollapse.value = isCollapse
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,13 +43,17 @@ import { MainMenu, MainHeader } from '@/components'
       display: none;
     }
   }
+  .el-header {
+    width: 100%;
+    --el-header-padding: 0 !important;
+  }
 }
 .aside {
   background-color: #071129;
 }
 .header {
-  background-color: #999e9e;
 }
 .main {
+  background-color: #f0f2f5;
 }
 </style>
