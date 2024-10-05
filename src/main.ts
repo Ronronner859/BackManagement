@@ -7,7 +7,7 @@ import pinia from './store'
 import './assets/tailwind/output.css' // 引入tailwindcss
 import { createI18n } from 'vue-i18n'
 import registerIcons from './global/register-icons'
-
+import './assets/css/index.css'
 // 针对ElMessage的样式
 // import 'element-plus/theme-chalk/el-message.css'
 console.log(import.meta.env)
