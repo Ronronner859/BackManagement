@@ -30,6 +30,7 @@ export const useLoginStore = defineStore('login', {
       // 根据用户角色请求权限
       const roleMenu = await getRoleById(this.userInfo.roles.id)
       const menus = roleMenu.data.menus
+      this.userMenu = menus
       // 进行本地存储
       localCache.setCache(USER_MENU, menus)
       localCache.setCache(USER_INFO, this.userInfo)

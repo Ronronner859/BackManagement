@@ -21,6 +21,7 @@ function loadLocalRoutes() {
   }
   return localRoutes
 }
+// export let firstMenu: any = null
 
 // export function mapMenusToRoutes(userMenu: any[]) {
 //   // 1. 加载所有本地路由
@@ -33,11 +34,16 @@ function loadLocalRoutes() {
 //       if (route) {
 //         routes.push(route)
 //       }
+//       if (!firstMenu && route) {
+//         firstMenu = subMenu
+//       }
 //     }
 //   }
 //   return routes
 // }
 // 递归添加路由
+export let firstMenu: any = null
+
 function addRoutesFromMenu(
   menu: any,
   localRoutes: RouteRecordRaw[],
@@ -47,6 +53,9 @@ function addRoutesFromMenu(
     const route = localRoutes.find((item) => item.path === subMenu.path)
     if (route) {
       routes.push(route)
+    }
+    if (!firstMenu && route) {
+      firstMenu = subMenu
     }
     if (subMenu.children) {
       addRoutesFromMenu(subMenu, localRoutes, routes)

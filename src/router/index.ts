@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { localCache } from '@/utils/cache'
 import { LOGIN_TOKEN } from '@/global/constants'
+import { firstMenu } from '@/utils/map-menus'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -48,7 +49,14 @@ const router = createRouter({
 // 导航守卫
 router.beforeEach((to, from, next) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  if (to.path.startsWith('/main') && !token) next('/login')
+  if (to.path.startsWith('/main') && !token) {
+    next('/login')
+  }
+  console.log(firstMenu)
+
+  if (to.path === '/main') {
+    next(firstMenu.path)
+  }
   next()
 })
 export default router
