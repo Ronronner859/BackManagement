@@ -5,13 +5,10 @@ import { localCache } from '@/utils/cache'
  * 获取用户列表
  * @returns
  */
-export function getUsers(offset: number, size: number) {
+export function getUsers(query: any) {
   return hyRequest.post({
     url: '/user/users',
-    data: {
-      offset: 0,
-      size: 10
-    }
+    data: query
     // headers: {
     //   Authorization: localCache.getCache(LOGIN_TOKEN)
     // }

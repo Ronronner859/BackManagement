@@ -27,6 +27,16 @@
             </el-table-column>
           </template>
           <el-table-column
+            v-else-if="column.prop === 'created_at'"
+            :prop="column.prop"
+            :label="column.label"
+            :width="column.width"
+          >
+            <template #default="scope">
+              {{ formatTime(scope.row.created_at, 'YYYY-MM-DD HH:mm:ss') }}
+            </template>
+          </el-table-column>
+          <el-table-column
             v-else
             :prop="column.prop"
             :label="column.label"
@@ -57,11 +67,12 @@
       <div class="user-content-pagination">
         <el-pagination
           :total="total"
-          :page-size="10"
+          :page-sizes="[10, 20, 30, 40, 50]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
           :current-page="currentPage"
-          :page-count="totalPages"
-          prev-text="上一页"
-          next-text="下一页"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         />
       </div>
     </div>
@@ -72,6 +83,7 @@
 import { ref, onMounted } from 'vue'
 import { useSystemStore } from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
+import { formatTime } from '@/utils/format-time'
 const columns = ref([
   { prop: 'id', label: 'ID', width: 180 },
   { prop: 'username', label: '用户名', width: 180 },
@@ -79,22 +91,31 @@ const columns = ref([
   { prop: 'status', label: '状态' },
   { prop: 'created_at', label: '创建时间' }
 ])
+// 分页
+
 const systemStore = useSystemStore()
-systemStore.getUsers(0, 10)
+const pageSize = ref(10)
+const currentPage = ref(1)
+fetchUsersList()
 // 解构出users和total 计算属性或者storeToRefs
 const { users, total } = storeToRefs(systemStore)
 // onMounted(async () => {
 //   await systemStore.getUsers(0, 10)
 //   tableData.value = systemStore.users
 // })
-const handleAddUser = () => {
-  console.log('添加用户')
+const handleSizeChange = (size: number) => {
+  pageSize.value = size
+  fetchUsersList()
 }
-const handleEdit = (row: any) => {
-  console.log('编辑用户', row)
+const handleCurrentChange = (page: number) => {
+  currentPage.value = page
+  fetchUsersList()
 }
-const handleDelete = (row: any) => {
-  console.log('删除用户', row)
+// 发送请求
+function fetchUsersList() {
+  const size = pageSize.value
+  const offset = (currentPage.value - 1) * size
+  systemStore.getUsers({ size, offset })
 }
 </script>
 

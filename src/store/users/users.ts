@@ -5,8 +5,8 @@ export const useUsersStore = defineStore('users', {
     users: []
   }),
   actions: {
-    async getUsers() {
-      const res = await getUsers()
+    async getUsers(query: any) {
+      const res = await getUsers(query)
       this.users = res.data
     },
     async getUserById(id: number) {

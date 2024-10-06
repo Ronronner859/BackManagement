@@ -137,3 +137,19 @@ role based access control
 # 文件路由自动化工具coderwhy
 
 npm install -g coderwhy
+
+# 用户管理
+
+1. 用户列表
+2. 用户添加
+3. 用户编辑
+4. 用户删除
+5. 用户状态
+6. 用户创建时间
+7. 用户操作
+
+# dayjs库
+
+npm install dayjs
+
+封装函数

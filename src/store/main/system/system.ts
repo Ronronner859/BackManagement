@@ -8,8 +8,8 @@ export const useSystemStore = defineStore('system', {
     total: 0
   }),
   actions: {
-    async getUsers(offset: number, size: number) {
-      const res = await getUsers(offset, size)
+    async getUsers(query: any) {
+      const res = await getUsers(query)
       this.users = res.data.data
       this.total = res.data.total
     }
