@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1>loginaaaaaaaaa</h1>
+    <h1>找不到页面了</h1>
     <router-view />
   </div>
 </template>
@@ -9,5 +9,6 @@
 
 <style lang="scss" scoped>
 .login {
+  color: red;
 }
 </style>

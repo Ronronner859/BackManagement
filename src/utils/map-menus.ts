@@ -37,6 +37,7 @@ function loadLocalRoutes() {
 //   }
 //   return routes
 // }
+// 递归添加路由
 function addRoutesFromMenu(
   menu: any,
   localRoutes: RouteRecordRaw[],
@@ -54,6 +55,7 @@ function addRoutesFromMenu(
 }
 
 export function mapMenusToRoutes(userMenu: any[]) {
+  console.log(userMenu)
   // 1. 加载所有本地路由
   const localRoutes = loadLocalRoutes()
   const routes: RouteRecordRaw[] = []

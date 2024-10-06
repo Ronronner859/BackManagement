@@ -11,9 +11,9 @@ import router from '@/router'
 export const useLoginStore = defineStore('login', {
   // 如何制定state的类型
   state: (): any => ({
-    token: localCache.getCache(LOGIN_TOKEN) ?? '',
-    userInfo: localCache.getCache(USER_INFO) ?? {},
-    userMenu: localCache.getCache(USER_MENU) ?? []
+    token: '',
+    userInfo: {},
+    userMenu: []
   }),
   getters: {},
   actions: {
@@ -29,18 +29,35 @@ export const useLoginStore = defineStore('login', {
       console.log(this.userInfo)
       // 根据用户角色请求权限
       const roleMenu = await getRoleById(this.userInfo.roles.id)
-      this.userMenu = roleMenu.data.menus
+      const menus = roleMenu.data.menus
       // 进行本地存储
-      localCache.setCache(USER_MENU, this.userMenu)
+      localCache.setCache(USER_MENU, menus)
       localCache.setCache(USER_INFO, this.userInfo)
       // 动态添加路由
-      const routes = mapMenusToRoutes(this.userMenu)
+      const routes = mapMenusToRoutes(menus)
       // 动态添加路由
       routes.forEach((route) => {
         router.addRoute('main', route)
       })
       // 页面跳转
       router.push('/main')
+    },
+    loadLocationCache() {
+      // 用户刷新的时候
+      const token = localCache.getCache(LOGIN_TOKEN)
+      const userInfo = localCache.getCache(USER_INFO)
+      const userMenu = localCache.getCache(USER_MENU)
+      if (token && userInfo && userMenu) {
+        this.token = token
+        this.userInfo = userInfo
+        this.userMenu = userMenu
+        // 动态添加路由
+        const routes = mapMenusToRoutes(this.userMenu)
+        // 动态添加路由
+        routes.forEach((route) => {
+          router.addRoute('main', route)
+        })
+      }
     }
   }
 })
