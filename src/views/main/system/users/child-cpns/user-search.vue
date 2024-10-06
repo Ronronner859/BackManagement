@@ -1,6 +1,11 @@
 <template>
   <div class="user-search">
-    <el-form :model="searchForm" size="small" label-width="80px">
+    <el-form
+      :model="searchForm"
+      ref="searchFormRef"
+      size="small"
+      label-width="80px"
+    >
       <el-row :gutter="20">
         <el-col :span="6">
           <el-form-item label="用户名" prop="name">
@@ -27,15 +32,15 @@
           <el-form-item label="部门" prop="departmentId">
             <el-input
               v-model="searchForm.departmentId"
-              placeholder="请输入部门"
+              placeholder="请选择部门"
             />
           </el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="状态" prop="enable">
             <el-select v-model="searchForm.enable" placeholder="请选择状态">
-              <el-option label="启用" value="1" />
-              <el-option label="禁用" value="0" />
+              <el-option label="启用" :value="1" />
+              <el-option label="禁用" :value="0" />
             </el-select>
           </el-form-item>
         </el-col>
@@ -74,13 +79,22 @@ const searchForm = ref({
   name: '',
   realname: '',
   cellphone: '',
-  departmentId: ''
+  departmentId: '',
+  enable: 1,
+  createAt: ''
 })
+const searchFormRef = ref<InstanceType<typeof ElForm>>()
 const handleSearch = () => {
   console.log(searchForm.value)
 }
+/**
+ * 重置
+ */
 const handleReset = () => {
-  searchForm.value = {}
+  // Object.keys(searchForm.value).forEach((key) => {
+  //   searchForm.value[key] = ''
+  // })
+  searchFormRef.value?.resetFields()
 }
 </script>
 
