@@ -92,7 +92,6 @@ const columns = ref([
   { prop: 'created_at', label: '创建时间' }
 ])
 // 分页
-
 const systemStore = useSystemStore()
 const pageSize = ref(10)
 const currentPage = ref(1)
@@ -113,6 +112,10 @@ const handleCurrentChange = (page: number) => {
 }
 const handleDelete = (row: any) => {
   systemStore.deleteUser(row.id)
+}
+const emit = defineEmits(['handleAddUser'])
+const handleAddUser = () => {
+  emit('handleAddUser')
 }
 // 发送请求
 function fetchUsersList(query: any = {}) {

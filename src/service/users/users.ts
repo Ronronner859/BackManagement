@@ -34,7 +34,7 @@ export function getUserById(id: number) {
  */
 export function createUser(data: any) {
   return hyRequest.post({
-    url: '/user/users',
+    url: '/user/create',
     data
   })
 }
@@ -46,7 +46,7 @@ export function createUser(data: any) {
  */
 export function updateUser(id: number, data: any) {
   return hyRequest.post({
-    url: `/user/users/${id}`,
+    url: `/user/users/update/${id}`,
     data
   })
 }

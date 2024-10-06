@@ -4,7 +4,8 @@
       @handleQuerySearch="handleQuerySearch"
       @resetSearchForm="resetSearchForm"
     />
-    <user-content ref="userContentRef" />
+    <user-content ref="userContentRef" @handleAddUser="handleAddUser" />
+    <user-drawer ref="userDrawerRef" />
   </div>
 </template>
 
@@ -12,12 +13,17 @@
 import UserSearch from './child-cpns/user-search.vue'
 import UserContent from './child-cpns/user-content.vue'
 import { ref } from 'vue'
+import UserDrawer from './child-cpns/user-drawer.vue'
 const userContentRef = ref<InstanceType<typeof UserContent>>()
+const userDrawerRef = ref<InstanceType<typeof UserDrawer>>()
 const handleQuerySearch = (query: any) => {
   userContentRef.value?.fetchUsersList(query)
 }
 const resetSearchForm = () => {
   userContentRef.value?.fetchUsersList()
+}
+const handleAddUser = () => {
+  userDrawerRef.value?.openDrawer()
 }
 </script>
 
