@@ -49,6 +49,9 @@ const updateIsCollapse = (isCollapse: boolean) => {
     width: 100%;
     --el-header-padding: 0 !important;
   }
+  .el-main {
+    padding: 15px;
+  }
 }
 .aside {
   background-color: #071129;

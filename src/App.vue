@@ -1,10 +1,16 @@
 <template>
   <div class="app">
-    <router-view></router-view>
+    <el-config-provider :locale="zhCn">
+      <router-view></router-view>
+    </el-config-provider>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// import { useI18n } from 'vue-i18n'
+// const { locale } = useI18n()
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+</script>
 
 <style lang="scss" scoped>
 .app {

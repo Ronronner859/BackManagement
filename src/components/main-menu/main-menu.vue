@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import { useLoginStore } from '@/store/login/login'
-import { ref, defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { firstMenu, mapPathToMenu } from '@/utils/map-menus'
 const router = useRouter()
@@ -55,8 +55,10 @@ const handleMenuClick = (child: any) => {
   router.push(path)
 }
 const route = useRoute()
-const menu = mapPathToMenu(route.path, userMenu)
-const defaultActive = ref(menu.id + '')
+const defaultActive = computed(() => {
+  const menu = mapPathToMenu(route.path, userMenu)
+  return menu.id + ''
+})
 </script>
 
 <style lang="scss">
@@ -101,10 +103,10 @@ const defaultActive = ref(menu.id + '')
     }
     .el-menu-item:hover {
       color: #ffffff !important;
-      background-color: #1fbe6c !important;
+      background-color: #00c2fd !important;
     }
     .el-menu-item.is-active {
-      background-color: #1a357a !important;
+      background-color: #0767a7 !important;
     }
   }
 
