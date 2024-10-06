@@ -22,18 +22,44 @@ function loadLocalRoutes() {
   return localRoutes
 }
 
+// export function mapMenusToRoutes(userMenu: any[]) {
+//   // 1. 加载所有本地路由
+//   const localRoutes = loadLocalRoutes()
+//   const routes: RouteRecordRaw[] = []
+//   // 2. 根据菜单动态添加路由
+//   for (const menu of userMenu) {
+//     for (const subMenu of menu.children) {
+//       const route = localRoutes.find((item) => item.path === subMenu.path)
+//       if (route) {
+//         routes.push(route)
+//       }
+//     }
+//   }
+//   return routes
+// }
+function addRoutesFromMenu(
+  menu: any,
+  localRoutes: RouteRecordRaw[],
+  routes: RouteRecordRaw[]
+) {
+  for (const subMenu of menu.children) {
+    const route = localRoutes.find((item) => item.path === subMenu.path)
+    if (route) {
+      routes.push(route)
+    }
+    if (subMenu.children) {
+      addRoutesFromMenu(subMenu, localRoutes, routes)
+    }
+  }
+}
+
 export function mapMenusToRoutes(userMenu: any[]) {
   // 1. 加载所有本地路由
   const localRoutes = loadLocalRoutes()
   const routes: RouteRecordRaw[] = []
   // 2. 根据菜单动态添加路由
   for (const menu of userMenu) {
-    for (const subMenu of menu.children) {
-      const route = localRoutes.find((item) => item.path === subMenu.path)
-      if (route) {
-        routes.push(route)
-      }
-    }
+    addRoutesFromMenu(menu, localRoutes, routes)
   }
   return routes
 }
