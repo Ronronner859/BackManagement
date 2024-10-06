@@ -12,6 +12,9 @@
             <el-input
               v-model="searchForm.username"
               placeholder="请输入用户名"
+              clearable
+              @keyup="handleSearch"
+              @clear="handleReset"
             />
           </el-form-item>
         </el-col>
@@ -86,7 +89,7 @@ const searchForm = ref({
   enable: 1,
   createAt: ''
 })
-const emit = defineEmits(['handleQuerySearch'])
+const emit = defineEmits(['handleQuerySearch', 'resetSearchForm'])
 const searchFormRef = ref<InstanceType<typeof ElForm>>()
 const handleSearch = () => {
   emit('handleQuerySearch', searchForm.value)
@@ -99,7 +102,7 @@ const handleReset = () => {
   //   searchForm.value[key] = ''
   // })
   searchFormRef.value?.resetFields()
-  emit('handleQuerySearch', {})
+  emit('resetSearchForm')
 }
 </script>
 

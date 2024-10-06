@@ -111,6 +111,9 @@ const handleCurrentChange = (page: number) => {
   currentPage.value = page
   fetchUsersList()
 }
+const handleDelete = (row: any) => {
+  systemStore.deleteUser(row.id)
+}
 // 发送请求
 function fetchUsersList(query: any = {}) {
   const size = pageSize.value

@@ -57,6 +57,6 @@ export function updateUser(id: number, data: any) {
  */
 export function deleteUser(id: number) {
   return hyRequest.post({
-    url: `/user/users/${id}`
+    url: `/user/users/delete/${id}`
   })
 }
