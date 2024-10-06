@@ -18,21 +18,9 @@ const router = createRouter({
     },
     {
       path: '/main',
+      name: 'main',
       component: () => import('@/views/main/Main.vue'),
-      children: [
-        {
-          path: '/main/analysis/technics',
-          component: () => import('@/views/main/analysis/technics/technics.vue')
-        },
-        {
-          path: '/main/system/users',
-          component: () => import('@/views/main/system/users/users.vue')
-        },
-        {
-          path: '/main/system/roles',
-          component: () => import('@/views/main/system/roles/roles.vue')
-        }
-      ]
+      children: []
     },
     {
       path: '/:pathMatch(.*)*',
@@ -40,7 +28,23 @@ const router = createRouter({
     }
   ]
 })
-
+// const loadLocalRoutes = [
+//   {
+//     path: '/main/analysis/technics',
+//     component: () => import('@/views/main/analysis/technics/technics.vue')
+//   },
+//   {
+//     path: '/main/system/users',
+//     component: () => import('@/views/main/system/users/users.vue')
+//   },
+//   {
+//     path: '/main/system/roles',
+//     component: () => import('@/views/main/system/roles/roles.vue')
+//   }
+// ]
+// // 动态添加路由
+// router.addRoute('main', loadLocalRoutes[0])
+// router.addRoute('main', loadLocalRoutes[1])
 // 导航守卫
 router.beforeEach((to, from, next) => {
   const token = localCache.getCache(LOGIN_TOKEN)

@@ -131,3 +131,9 @@ role based access control
 5. 用户退出
 
 # 动态路由
+
+两种方案
+
+# 文件路由自动化工具coderwhy
+
+npm install -g coderwhy

@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { login } from '@/service/login/login'
 import type { IForm } from '@/types'
 import { localCache } from '@/utils/cache'
-import router from '@/router'
+import { mapMenusToRoutes } from '@/utils/map-menus'
 import { LOGIN_TOKEN, USER_INFO, USER_MENU } from '@/global/constants'
 import { getUserById, getRoleById } from '@/service/login/login'
-//字符串 ---  抽取常量
+import router from '@/router'
 
+//字符串 ---  抽取常量
 export const useLoginStore = defineStore('login', {
   // 如何制定state的类型
   state: (): any => ({
@@ -32,6 +33,12 @@ export const useLoginStore = defineStore('login', {
       // 进行本地存储
       localCache.setCache(USER_MENU, this.userMenu)
       localCache.setCache(USER_INFO, this.userInfo)
+      // 动态添加路由
+      const routes = mapMenusToRoutes(this.userMenu)
+      // 动态添加路由
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
       // 页面跳转
       router.push('/main')
     }
