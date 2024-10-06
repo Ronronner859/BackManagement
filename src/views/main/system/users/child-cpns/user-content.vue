@@ -112,11 +112,14 @@ const handleCurrentChange = (page: number) => {
   fetchUsersList()
 }
 // 发送请求
-function fetchUsersList() {
+function fetchUsersList(query: any = {}) {
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
-  systemStore.getUsers({ size, offset })
+  systemStore.getUsers({ size, offset, ...query })
 }
+defineExpose({
+  fetchUsersList
+})
 </script>
 
 <style scoped lang="scss">

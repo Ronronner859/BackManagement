@@ -8,8 +8,11 @@
     >
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-form-item label="用户名" prop="name">
-            <el-input v-model="searchForm.name" placeholder="请输入用户名" />
+          <el-form-item label="用户名" prop="username">
+            <el-input
+              v-model="searchForm.username"
+              placeholder="请输入用户名"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="6">
@@ -76,16 +79,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const searchForm = ref({
-  name: '',
+  username: '',
   realname: '',
   cellphone: '',
   departmentId: '',
   enable: 1,
   createAt: ''
 })
+const emit = defineEmits(['handleQuerySearch'])
 const searchFormRef = ref<InstanceType<typeof ElForm>>()
 const handleSearch = () => {
-  console.log(searchForm.value)
+  emit('handleQuerySearch', searchForm.value)
 }
 /**
  * 重置
@@ -95,6 +99,7 @@ const handleReset = () => {
   //   searchForm.value[key] = ''
   // })
   searchFormRef.value?.resetFields()
+  emit('handleQuerySearch', {})
 }
 </script>
 
