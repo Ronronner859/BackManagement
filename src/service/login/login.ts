@@ -11,7 +11,7 @@ export function login(data: IForm) {
   })
 }
 export function getUserById(id: number) {
-  return hyRequest.get({
+  return hyRequest.post({
     url: `/user/users/${id}`,
     headers: {
       Authorization: localCache.getCache(LOGIN_TOKEN)
