@@ -1,5 +1,9 @@
 import { RouteRecordRaw } from 'vue-router'
 
+/**
+ * 加载所有本地路由
+ * @returns 本地路由
+ */
 function loadLocalRoutes() {
   const routes: RouteRecordRaw[] = []
   // 动态添加路由
@@ -43,6 +47,12 @@ function loadLocalRoutes() {
 // }
 // 递归添加路由
 export let firstMenu: any = null
+/**
+ *
+ * @param menu 菜单
+ * @param localRoutes 本地路由
+ * @param routes 路由
+ */
 
 function addRoutesFromMenu(
   menu: any,
@@ -62,6 +72,11 @@ function addRoutesFromMenu(
     }
   }
 }
+/**
+ * 根据菜单动态添加路由
+ * @param userMenu 菜单
+ * @returns 路由
+ */
 
 export function mapMenusToRoutes(userMenu: any[]) {
   console.log(userMenu)
@@ -73,4 +88,21 @@ export function mapMenusToRoutes(userMenu: any[]) {
     addRoutesFromMenu(menu, localRoutes, routes)
   }
   return routes
+}
+/**
+ * 根据路径找到对应的菜单
+ * @param path 路径
+ * @param userMenu 菜单
+ * @returns 菜单
+ */
+
+export function mapPathToMenu(path: string, userMenu: any[]) {
+  for (const menu of userMenu) {
+    for (const subMenu of menu.children) {
+      if (subMenu.path === path) {
+        return subMenu
+      }
+    }
+  }
+  return null
 }

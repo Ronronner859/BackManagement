@@ -6,7 +6,7 @@
     </div>
     <div class="main-menu-menu">
       <el-menu
-        default-active="2"
+        :default-active="defaultActive"
         :collapse="isShowCollapse"
         active-text-color="#ffd04b"
         background-color="#545c64"
@@ -41,7 +41,8 @@
 <script setup lang="ts">
 import { useLoginStore } from '@/store/login/login'
 import { ref, defineProps } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { firstMenu, mapPathToMenu } from '@/utils/map-menus'
 const router = useRouter()
 const props = defineProps<{
   isShowCollapse: boolean
@@ -53,6 +54,9 @@ const handleMenuClick = (child: any) => {
   const path = child.path
   router.push(path)
 }
+const route = useRoute()
+const menu = mapPathToMenu(route.path, userMenu)
+const defaultActive = ref(menu.id + '')
 </script>
 
 <style lang="scss">
