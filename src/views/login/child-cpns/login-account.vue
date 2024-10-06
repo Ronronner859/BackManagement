@@ -63,6 +63,7 @@ const handleLogin = (rememberMe: boolean) => {
   accountFormRef.value.validate((valid: boolean) => {
     if (valid) {
       loginStore.accountLogin(form.value).then(() => {
+        ElMessage.success('欢迎来到Beaky-cms后台')
         if (rememberMe) {
           localCache.setCache(ACCOUNT_INFO, form.value)
         } else {

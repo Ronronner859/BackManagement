@@ -62,6 +62,10 @@ function addRoutesFromMenu(
   for (const subMenu of menu.children) {
     const route = localRoutes.find((item) => item.path === subMenu.path)
     if (route) {
+      // 如果路由表中没有这个菜单的路由，则添加一个重定向到这个菜单的路由
+      if (!routes.find((item) => item.path === menu.path)) {
+        routes.push({ path: menu.path, redirect: route.path })
+      }
       routes.push(route)
     }
     if (!firstMenu && route) {
@@ -101,6 +105,33 @@ export function mapPathToMenu(path: string, userMenu: any[]) {
     for (const subMenu of menu.children) {
       if (subMenu.path === path) {
         return subMenu
+      }
+    }
+  }
+  return null
+}
+
+/**
+ * 根据路径找到对应的面包屑
+ * @param path 路径
+ * @param userMenu 菜单
+ * @returns 面包屑
+ */
+interface IBreadcrumb {
+  name: string
+  path?: string
+}
+export function mapPathToBreadcrumb(
+  path: string,
+  userMenu: any[]
+): IBreadcrumb[] {
+  const breadcrumb: IBreadcrumb[] = []
+  for (const menu of userMenu) {
+    for (const subMenu of menu.children) {
+      if (subMenu.path === path) {
+        breadcrumb.push({ name: menu.name, path: menu.path })
+        breadcrumb.push({ name: subMenu.name, path: subMenu.path })
+        return breadcrumb
       }
     }
   }

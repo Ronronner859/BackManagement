@@ -1,14 +1,15 @@
 <template>
   <div class="main-header">
-    <div class="main-icon" @click="handleFold">
-      <el-icon size="24">
-        <component :is="isCollapse ? 'Fold' : 'Expand'" />
-      </el-icon>
+    <div class="main-header-left">
+      <div class="main-icon" @click="handleFold">
+        <el-icon size="24">
+          <component :is="isCollapse ? 'Fold' : 'Expand'" />
+        </el-icon>
+      </div>
+      <HeaderCrumb />
     </div>
     <div class="main-header-right">
-      <div class="main-header-right-user">
-        <HeaderInfo />
-      </div>
+      <HeaderInfo />
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@
 import { ref, defineEmits } from 'vue'
 import { Fold, Bell, User } from '@element-plus/icons-vue'
 import HeaderInfo from './child-cpn/header-info.vue'
+import HeaderCrumb from './child-cpn/header-crumb.vue'
 const isCollapse = ref(false)
 const emit = defineEmits(['updateIsCollapse'])
 const handleFold = () => {
@@ -32,6 +34,10 @@ const handleFold = () => {
   align-items: center;
   height: 60px;
   background-color: #fff;
+}
+.main-header-left {
+  display: flex;
+  align-items: center;
 }
 .main-icon {
   margin-left: 20px;
