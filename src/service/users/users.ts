@@ -70,9 +70,26 @@ const formatPath = (path: string) => {
  * 获取角色列表
  * @returns
  */
-export function getRoles(pageName: string, query: any) {
+export function getPageRoles(pageName: string, query: any) {
   return hyRequest.post({
     url: `/role/${pageName}/list`,
     data: query
+  })
+}
+export function deletePageData(pageName: string, id: number) {
+  return hyRequest.post({
+    url: `/role/${pageName}/delete/${id}`
+  })
+}
+export function createPageData(pageName: string, data: any) {
+  return hyRequest.post({
+    url: `/role/${pageName}/create`,
+    data
+  })
+}
+export function editPageData(pageName: string, id: number, data: any) {
+  return hyRequest.post({
+    url: `/role/${pageName}/update/${id}`,
+    data
   })
 }

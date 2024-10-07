@@ -6,4 +6,6 @@ interface User {
 export interface IState {
   users: User[]
   total: number
+  pageList: any[]
+  pageTotal: number
 }
