@@ -14,6 +14,7 @@
               <template v-if="item.type === 'input'">
                 <el-input
                   v-bind="item.otherOptions"
+                  v-model="searchForm[item.prop]"
                   @input="handleInputChange"
                   clearable
                   @clear="handleReset"
@@ -23,9 +24,27 @@
               <template v-else-if="item.type === 'datepicker'">
                 <el-date-picker
                   v-bind="item.otherOptions"
+                  v-model="searchForm[item.prop]"
                   @input="handleInputChange"
                   clearable
+                  :range-separator="item.otherOptions.rangeSeparator"
                 />
+              </template>
+              <template v-else-if="item.type === 'select'">
+                <el-select
+                  v-bind="item.otherOptions"
+                  v-model="searchForm[item.prop]"
+                  @input="handleInputChange"
+                  clearable
+                  :placeholder="item.placeholder"
+                >
+                  <el-option
+                    v-for="option in item.options"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  />
+                </el-select>
               </template>
             </el-form-item>
           </el-col>
@@ -54,11 +73,17 @@ import { ref } from 'vue'
 // 定义props类型 自定义属性接受的类型
 interface IProps {
   searchConfig: {
+    labelWidth?: string
     formItems: any[]
   }
 }
 const props = defineProps<IProps>()
-const searchForm = ref({})
+//动态生成表单
+const initFormData: any = {}
+props.searchConfig.formItems.forEach((item) => {
+  initFormData[item.prop] = item.initialValue ?? ''
+})
+const searchForm = ref(initFormData)
 const emit = defineEmits(['handleQuerySearch', 'resetSearchForm'])
 const searchFormRef = ref<InstanceType<typeof ElForm>>()
 const handleSearch = () => {
