@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
-import { getUsers, deleteUser, createUser } from '@/service/users/users'
+import {
+  getUsers,
+  deleteUser,
+  createUser,
+  updateUser
+} from '@/service/users/users'
 import type { IState } from './types'
 
 export const useSystemStore = defineStore('system', {
@@ -21,6 +26,12 @@ export const useSystemStore = defineStore('system', {
     async createUserFrom(data: any) {
       await createUser(data)
       // 创建成功后，重新获取用户列表
+      this.getUsers({ size: 10, offset: 0 })
+    },
+    async editUserFrom(id: number, data: any) {
+      console.log(id, data)
+      await updateUser(id, data)
+      // 编辑成功后，重新获取用户列表
       this.getUsers({ size: 10, offset: 0 })
     }
   }

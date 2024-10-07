@@ -11,7 +11,7 @@
         <el-form-item label="用户名" prop="username">
           <el-input v-model="drawerForm.username" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <el-form-item label="密码" prop="password" v-if="isNew">
           <el-input v-model="drawerForm.password" />
         </el-form-item>
       </el-form>
@@ -30,7 +30,7 @@ const systemStore = useSystemStore()
 const drawerVisible = ref(false)
 const drawerTitle = ref('添加用户')
 const drawerSize = ref('40%')
-const drawerForm = ref({
+const drawerForm = ref<any>({
   username: '',
   password: ''
 })
@@ -42,11 +42,29 @@ const handleCancel = () => {
   drawerVisible.value = false
 }
 const handleSubmit = () => {
-  systemStore.createUserFrom(drawerForm.value)
   drawerVisible.value = false
+  if (isNew.value) {
+    systemStore.createUserFrom(drawerForm.value)
+  } else {
+    systemStore.editUserFrom(editData.value.id, editData.value)
+  }
 }
-const openDrawer = () => {
+const isNew = ref(true)
+const editData = ref<any>(null)
+const openDrawer = (data: any, isEdit: boolean) => {
   drawerVisible.value = true
+  isNew.value = isEdit
+  if (!isEdit && data) {
+    drawerTitle.value = '编辑用户'
+    drawerForm.value = data
+    editData.value = data
+  } else {
+    drawerTitle.value = '添加用户'
+    for (let key in drawerForm.value) {
+      drawerForm.value[key] = ''
+    }
+    editData.value = null
+  }
 }
 defineExpose({
   openDrawer

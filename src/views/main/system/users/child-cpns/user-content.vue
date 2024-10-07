@@ -113,7 +113,10 @@ const handleCurrentChange = (page: number) => {
 const handleDelete = (row: any) => {
   systemStore.deleteUser(row.id)
 }
-const emit = defineEmits(['handleAddUser'])
+const handleEdit = (data: any) => {
+  emit('handleEdit', data)
+}
+const emit = defineEmits(['handleAddUser', 'handleEdit'])
 const handleAddUser = () => {
   emit('handleAddUser')
 }

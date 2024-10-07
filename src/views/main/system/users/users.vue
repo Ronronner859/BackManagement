@@ -4,7 +4,11 @@
       @handleQuerySearch="handleQuerySearch"
       @resetSearchForm="resetSearchForm"
     />
-    <user-content ref="userContentRef" @handleAddUser="handleAddUser" />
+    <user-content
+      ref="userContentRef"
+      @handleAddUser="handleAddUser"
+      @handleEdit="handleEdit"
+    />
     <user-drawer ref="userDrawerRef" />
   </div>
 </template>
@@ -23,7 +27,11 @@ const resetSearchForm = () => {
   userContentRef.value?.fetchUsersList()
 }
 const handleAddUser = () => {
-  userDrawerRef.value?.openDrawer()
+  userDrawerRef.value?.openDrawer(null, true)
+}
+const handleEdit = (data: any) => {
+  console.log(data)
+  userDrawerRef.value?.openDrawer(data, false)
 }
 </script>
 
