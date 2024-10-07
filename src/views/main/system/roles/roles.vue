@@ -1,9 +1,11 @@
 <template>
   <div class="roles">
-    <h1>角色管理</h1>
+    <page-search />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import PageSearch from './child-cpns/page-search.vue'
+</script>
 
 <style lang="scss" scoped></style>
