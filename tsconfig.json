@@ -24,7 +24,7 @@
     // 相关baseUrl，paths说明请查看官方文档
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "types": ["element-plus/global"],
+    "types": ["element-plus/global", "lighting-pro/components.d.ts"],
     "module": "ESNext"
   },
   // include也需要配置以下：
